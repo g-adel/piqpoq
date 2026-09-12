@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@custom-variant dark (&:is(.dark *));
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif; --font-mono: 'SFMono-Regular', Consolas, monospace;
+  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border); --color-ring: var(--ring);
+}
+:root, .dark { color-scheme: dark; --background: #08080d; --foreground: #e4faff; --primary: #b6f8ff; --primary-foreground: #08080d; --border: #30303f; --ring: #b6f8ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; min-height: 100%; background: var(--background); color: var(--foreground); }
+body { font-family: Arial, Helvetica, sans-serif; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid #b6f8ff; outline-offset: 5px; }
+.game { position: relative; width: 100%; height: 100svh; min-height: 320px; overflow: hidden; touch-action: none; user-select: none; background: #08080d; }
+.track { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lane { stroke: #79709c; stroke-width: 1; opacity: .17; vector-effect: non-scaling-stroke; }
+.hud { position: absolute; z-index: 3; top: max(24px, env(safe-area-inset-top)); left: max(28px, env(safe-area-inset-left)); right: max(28px, env(safe-area-inset-right)); display: flex; justify-content: space-between; align-items: start; }
+.score { display: flex; flex-direction: column; gap: 7px; }
+.score span { font: 12px 'SFMono-Regular', Consolas, monospace; letter-spacing: .2em; color: #858395; }
+.score output { font: 32px 'SFMono-Regular', Consolas, monospace; font-variant-numeric: tabular-nums; letter-spacing: -.05em; }
+.hud-actions { display: flex; gap: 6px; }
+.icon-button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; color: #8d8b9e; border-radius: 4px; }
+.icon-button:hover { color: #e4faff; background: #ffffff08; }
+.icon-button svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.overlay { position: absolute; z-index: 2; top: 25%; left: 50%; transform: translateX(-50%); width: min(90%, 480px); padding: 24px 12px; text-align: center; background: #08080def; }
+.overlay[hidden], [hidden] { display: none !important; }
+.eyebrow { margin: 0 0 18px; color: #b38ce8; font: 12px 'SFMono-Regular', Consolas, monospace; letter-spacing: .28em; text-transform: uppercase; }
+.overlay h1 { margin: 0 0 20px; font-size: clamp(40px, 7vw, 70px); font-weight: 400; line-height: 1; letter-spacing: .13em; padding-left: .13em; }
+.overlay p.instructions { color: #9593a6; font-size: 15px; line-height: 1.8; margin: 0 0 27px; }
+.start-button { min-height: 48px; padding: 0 32px; border: 1px solid #a5ecf270; background: #b6f8ff09; color: #b6f8ff; font: 14px 'SFMono-Regular', Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; transition: background .15s; }
+.start-button:hover { background: #b6f8ff18; }
+.key-hint { display: block; margin-top: 13px; font: 12px 'SFMono-Regular', Consolas, monospace; color: #777585; }
+.input-hints { position: absolute; z-index: 1; bottom: max(26px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; justify-content: space-between; width: min(72%, 430px); pointer-events: none; }
+.input-hint { display: flex; align-items: center; gap: 10px; font: 12px 'SFMono-Regular', Consolas, monospace; letter-spacing: .12em; color: #767286; transition: color .07s; }
+.input-hint b { font: 24px Arial, sans-serif; }
+.input-hint[data-held=true] { color: #b6f8ff; }
+.game[data-playing=true] .input-hint span { display: none; }
+.count-in { position: absolute; top: 35%; left: 0; right: 0; text-align: center; font: 48px 'SFMono-Regular', Consolas, monospace; color: #b6f8ff; pointer-events: none; }
+.audio-notice { position: absolute; z-index: 4; bottom: 80px; width: 100%; text-align: center; color: #9593a6; font-size: 14px; pointer-events: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 600px) { .hud { top: max(18px, env(safe-area-inset-top)); left: 20px; right: 14px; } .overlay { top: 24%; } }
+@media (max-height: 520px) { .overlay { top: 12%; padding: 12px; } .overlay h1 { font-size: 36px; margin-bottom: 10px; } .eyebrow { margin-bottom: 12px; } .overlay p.instructions { margin-bottom: 12px; } .key-hint { display: none; } .input-hints { bottom: 14px; } }
