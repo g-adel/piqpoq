@@ -73,7 +73,13 @@ export class RhythmAudio {
     if (!this.context) return;
     const at = this.epoch + event.time;
     if (event.type === 'failure') { this.stop(); this.tone(this.context.currentTime, 150, 0.22, 0.09, 'triangle', 35); }
-    else this.tone(at, event.type === 'entry' ? 330 : 660, 0.065, 0.075, 'sine', event.type === 'entry' ? 260 : 540);
+    else if (event.type === 'entry') {
+      this.tone(at, 180, 0.11, 0.12, 'sine', 48);
+      this.tone(at, 1200, 0.032, 0.035, 'triangle', 310);
+    } else {
+      this.tone(at, 680, 0.07, 0.065, 'sine', 420);
+      this.tone(at, 130, 0.075, 0.055, 'sine', 65);
+    }
   }
 
   stop(): void { for (const voice of this.voices) { try { voice.stop(); } catch { /* Already ended. */ } } this.voices.clear(); }

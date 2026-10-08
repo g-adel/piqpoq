@@ -18,6 +18,8 @@ Use Node 22.13+ and npm. Run `npm install`, then `npm run dev`. Open the local U
 
 120 BPM; half-beat lateral travel; a four-beat lead-in. Entry intervals decrease from four beats to one beat in half-beat steps after every 16 turns. World speed stays constant. A seeded generator keeps transfers inside five lanes and maintains a bounded lookahead.
 
+`motion.ts` samples presentation without modifying simulation state: a held-direction lean during the final 180 ms of approach, impact compression and rebound, and a small exponential camera follow through both reflections. Barrier faces meet the incoming arrow tip. Contact flashes, directional sparks, and a short corner-preserving trail share the run timeline and freeze on pause. Reduced-motion preferences disable camera motion, deformation, and sparks. Sound pairs a low entry impact with a higher exit reflection.
+
 ## Checks
 
 `npm test` runs deterministic simulation, input, and WebMCP action-contract tests. `npm run typecheck` checks TypeScript. `npm run build` creates the Sites deployment build. Browser-native WebMCP registration requires a supported browser context; the unit tests do not substitute for that integration check.
